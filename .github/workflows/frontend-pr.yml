@@ -1,0 +1,39 @@
+name: API CI checks
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'frontend/**'
+
+jobs:
+  lint:
+    name: Lint Frontend
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup API
+        uses: rkulinski/offboarding/.github/actions/node-app-setup@main
+        with:
+          working-directory: ./frontend
+          node-version: '20'
+      - name: Run ESLint
+        working-directory: ./frontend
+        run: npm run lint
+
+  test:
+    name: Test API
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup API
+        uses: rkulinski/offboarding/.github/actions/node-app-setup@main
+        with:
+          working-directory: ./frontend
+          node-version: '20'
+      - name: Run Tests
+        working-directory: ./frontend
+        env:
+          NODE_ENV: test
+        run: npm test
