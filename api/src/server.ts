@@ -2,11 +2,13 @@ import express, { Request, Response } from "express";
 import bodyParser from "body-parser";
 import { Employee } from "./entities";
 import { db, saveDb } from "./db";
+import cors from "cors";
 
 export const app = express();
 const port = 3000;
 
 app.use(bodyParser.json());
+app.use(cors());
 
 app.get("/employees", (req: Request, res: Response) => {
   res.json(db.employees);
