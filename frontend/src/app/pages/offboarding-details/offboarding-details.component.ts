@@ -4,10 +4,11 @@ import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-offboarding-details',
-  imports: [FormsModule, MatTableModule, CommonModule],
+  imports: [FormsModule, MatTableModule, CommonModule, MatButton],
   templateUrl: './offboarding-details.component.html',
   styleUrl: './offboarding-details.component.scss',
 })
@@ -28,5 +29,13 @@ export class OffboardingDetailsComponent implements OnInit {
           this.employee = data;
         });
     }
+  }
+
+  offboardEmployee() {
+    if (!this.employee) {
+      throw new Error('No employee selected.');
+    }
+
+    this.apiService.offboardEmployee(this.employee.id);
   }
 }
