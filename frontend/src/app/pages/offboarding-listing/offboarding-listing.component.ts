@@ -1,46 +1,76 @@
 import { Component, OnInit } from '@angular/core';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import {
-  MatCell,
-  MatHeaderCell,
-  MatHeaderRow,
-  MatRow,
-  MatTable,
-} from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
+import { ApiService, Employee } from './services/api/api.service';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+import { DataSource } from '@angular/cdk/collections';
+import { Observable, ReplaySubject } from 'rxjs';
 
 @Component({
   selector: 'app-offboarding-listing',
   imports: [
-    MatFormField,
-    MatTable,
-    MatHeaderCell,
-    MatHeaderRow,
-    MatCell,
-    MatRow,
+    MatTableModule,
+    MatInputModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatIconModule,
     FormsModule,
-    MatLabel,
+    RouterLink,
   ],
   templateUrl: './offboarding-listing.component.html',
   styleUrl: './offboarding-listing.component.scss',
 })
 export class OffboardingListingComponent implements OnInit {
-  employees = [];
+  employees: Employee[] = [];
   searchQuery = '';
+  displayedColumns: string[] = ['name', 'department', 'status', 'actions'];
+  dataSource = new ExampleDataSource(this.employees);
 
-  // constructor(private employeeService: EmployeeService) {}
+  constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
     this.loadEmployees();
   }
 
   loadEmployees(): void {
-    // this.employeeService.getEmployees().subscribe((data) => {
-    //   this.employees = data;
-    // });
+    this.apiService.getEmployees().subscribe((data) => {
+      this.employees = data;
+      this.dataSource.setData(data);
+    });
   }
 
-  filterEmployees() {
-    return this.employees;
+  filterEmployees(): void {
+    const lowerCaseQuery = this.searchQuery.toLowerCase();
+
+    const filteredData = this.employees.filter((employee) =>
+      Object.values(employee).some((value) =>
+        value.toString().toLowerCase().includes(lowerCaseQuery),
+      ),
+    );
+
+    this.dataSource.setData(filteredData);
+  }
+}
+
+class ExampleDataSource extends DataSource<Employee> {
+  private _dataStream = new ReplaySubject<Employee[]>();
+
+  constructor(initialData: Employee[]) {
+    super();
+    this.setData(initialData);
+  }
+
+  connect(): Observable<Employee[]> {
+    return this._dataStream;
+  }
+
+  disconnect() {}
+
+  setData(data: Employee[]) {
+    this._dataStream.next(data);
   }
 }
