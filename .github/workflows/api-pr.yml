@@ -1,0 +1,39 @@
+name: API CI checks
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'api/**'
+
+jobs:
+  lint:
+    name: Lint API
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup API
+        uses: rkulinski/offboarding/.github/actions/node-app-setup@main
+        with:
+          working-directory: ./api
+          node-version: '20'
+      - name: Run ESLint
+        working-directory: ./api
+        run: npm run lint
+
+  test:
+    name: Test API
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup API
+        uses: rkulinski/offboarding/.github/actions/node-app-setup@main
+        with:
+          working-directory: ./api
+          node-version: '20'
+      - name: Run Tests
+        working-directory: ./api
+        env:
+          NODE_ENV: test
+        run: npm test

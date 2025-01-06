@@ -1,17 +1,25 @@
-name: API CI setup
+name: API Setup
+description: Sets up Node.js, installs dependencies, and prepares the environment for the API.
 
-on:
-  workflow_call:
+inputs:
+  working-directory:
+    description: Directory where dependencies should be installed.
+    required: true
+  node-version:
+    description: Node.js version to use.
+    required: true
+    default: '20'
 
-jobs:
-  setup:
+runs:
+  using: "composite"
+  steps:
     - name: Checkout Code
       uses: actions/checkout@v4
 
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '20'
+        node-version: ${{ inputs.node-version }}
 
     - name: Cache node modules
       uses: actions/cache@v3
@@ -24,6 +32,7 @@ jobs:
           ${{ runner.os }}-build-${{ env.cache-name }}-
           ${{ runner.os }}-build-
           ${{ runner.os }}-
+
     - name: Install Dependencies
-      working-directory: ./api
       run: npm ci
+      working-directory: ${{ inputs.working-directory }}
