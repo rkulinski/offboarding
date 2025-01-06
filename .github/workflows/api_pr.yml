@@ -13,8 +13,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Setup
-        uses: rkulinski/offboarding/.github/workflows/api_setup.yml@main
+      - name: Setup API
+        uses: rkulinski/offboarding/.github/actions/api-setup
+        with:
+          working-directory: ./api
+          node-version: '20'
       - name: Run ESLint
         working-directory: ./api
         run: npm run lint
@@ -24,8 +27,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Setup
-        uses: rkulinski/offboarding/.github/workflows/api_setup.yml@main
+      - name: Setup API
+        uses: rkulinski/offboarding/.github/actions/api-setup
+        with:
+          working-directory: ./api
+          node-version: '20'
       - name: Run Tests
         working-directory: ./api
         env:
