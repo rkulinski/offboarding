@@ -8,14 +8,13 @@ on:
       - 'api/**'
 
 jobs:
-  lint-and-test:
-    name: Run Lint and Tests on API
+  lint:
+    name: Lint API
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
-
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -24,11 +23,28 @@ jobs:
 
       - name: Install Dependencies
         working-directory: ./api
-        run: npm install
+        run: npm ci
 
       - name: Run ESLint
         working-directory: ./api
         run: npm run lint
+
+  test:
+    name: Test API
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies
+        working-directory: ./api
+        run: npm ci
 
       - name: Run Tests
         working-directory: ./api
