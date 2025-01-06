@@ -46,10 +46,10 @@ export class OffboardingListingComponent implements OnInit {
   filterEmployees(): void {
     const lowerCaseQuery = this.searchQuery.toLowerCase();
 
-    const filteredData = this.employees.filter((employee) =>
-      Object.values(employee).some((value) =>
-        value.toString().toLowerCase().includes(lowerCaseQuery),
-      ),
+    const filteredData = this.employees.filter(
+      (employee) =>
+        employee.name.toLowerCase().includes(lowerCaseQuery) ||
+        employee.department.toLowerCase().includes(lowerCaseQuery),
     );
 
     this.dataSource.setData(filteredData);
@@ -68,6 +68,7 @@ class ExampleDataSource extends DataSource<Employee> {
     return this._dataStream;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   disconnect() {}
 
   setData(data: Employee[]) {
