@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Setup API
+      - name: Setup
         uses: rkulinski/offboarding/.github/actions/node-app-setup@main
         with:
           working-directory: ./frontend
@@ -23,11 +23,11 @@ jobs:
         run: npm run lint
 
   test:
-    name: Test API
+    name: Test Frontend
     runs-on: ubuntu-latest
 
     steps:
-      - name: Setup API
+      - name: Setup
         uses: rkulinski/offboarding/.github/actions/node-app-setup@main
         with:
           working-directory: ./frontend
