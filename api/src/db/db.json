@@ -1,0 +1,16 @@
+
+{
+  "employees": [
+    {
+      "id": "vvv1323",
+      "name": "John Doe",
+      "department": "Engineering",
+      "status": "ACTIVE",
+      "email": "some.email@wp.pl",
+      "equipments": [
+        { "id": "aaa123456", "name": "Macbook air" },
+        { "id": "aaa123457", "name": "Magic Mouse" }
+      ]
+    }
+  ]
+}
