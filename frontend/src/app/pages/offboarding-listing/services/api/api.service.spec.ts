@@ -85,7 +85,9 @@ describe('ApiService', () => {
         expect(employee).toEqual(mockEmployee);
       });
 
-      const req = httpController.expectOne(`${service['baseUrl']}/users/1/offboard`);
+      const req = httpController.expectOne(
+        `${service['baseUrl']}/users/1/offboard`,
+      );
       expect(req.request.method).toBe('POST');
       req.flush(mockEmployee);
     });
