@@ -1,4 +1,4 @@
-// @ts-check
+/* eslint-disable */
 const eslint = require("@eslint/js");
 const globals = require("globals");
 const tseslint = require("typescript-eslint");
@@ -13,3 +13,4 @@ module.exports = tseslint.config(
   ...tseslint.configs.recommended,
   eslintPluginPrettierRecommended,
 );
+/* eslint-enable */

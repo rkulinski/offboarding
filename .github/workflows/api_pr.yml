@@ -1,4 +1,4 @@
-name: Test and Lint API
+name: API CI checks
 
 on:
   pull_request:
@@ -13,18 +13,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
-
-      - name: Install Dependencies
-        working-directory: ./api
-        run: npm ci
-
+      - name: Setup
+        uses: ./api_setup.yml
       - name: Run ESLint
         working-directory: ./api
         run: npm run lint
@@ -34,18 +24,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
-
-      - name: Install Dependencies
-        working-directory: ./api
-        run: npm ci
-
+      - name: Setup
+        uses: ./api_setup.yml
       - name: Run Tests
         working-directory: ./api
         env:
