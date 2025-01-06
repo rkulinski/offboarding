@@ -5,35 +5,33 @@ on:
     branches:
       - main
     paths:
-      - 'api/**'
+      - 'frontend/**'
 
 jobs:
   lint:
-    name: Lint API
+    name: Lint Frontend
     runs-on: ubuntu-latest
 
     steps:
       - name: Setup
         uses: rkulinski/offboarding/.github/actions/node-app-setup@main
         with:
-          working-directory: ./api
+          working-directory: ./frontend
           node-version: '20'
       - name: Run ESLint
-        working-directory: ./api
+        working-directory: ./frontend
         run: npm run lint
 
   test:
-    name: Test
+    name: Test Frontend
     runs-on: ubuntu-latest
 
     steps:
-      - name: Setup API
+      - name: Setup
         uses: rkulinski/offboarding/.github/actions/node-app-setup@main
         with:
-          working-directory: ./api
+          working-directory: ./frontend
           node-version: '20'
       - name: Run Tests
-        working-directory: ./api
-        env:
-          NODE_ENV: test
-        run: npm test
+        working-directory: ./frontend
+        run: npm run test:ci
