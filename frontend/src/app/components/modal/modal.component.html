@@ -1,0 +1,16 @@
+<div class="modal-backdrop" *ngIf="showModal">
+  <div class="modal">
+    <header class="modal-header">
+      <h2>{{ title }}</h2>
+      <button mat-icon-button aria-label="Close" (click)="close()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </header>
+    <section class="modal-content">
+      <ng-content></ng-content>
+    </section>
+    <footer class="modal-footer">
+      <button mat-raised-button color="primary" (click)="close()">Close</button>
+    </footer>
+  </div>
+</div>
