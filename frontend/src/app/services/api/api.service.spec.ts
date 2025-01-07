@@ -1,7 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
-import { ApiService, Employee } from 'src/app/services/api/api.service';
+import {
+  ApiService,
+  Employee,
+  OffboardingData,
+} from 'src/app/services/api/api.service';
 import { HttpTestingController } from '@angular/common/http/testing';
 
 describe('ApiService', () => {
@@ -79,11 +83,14 @@ describe('ApiService', () => {
         email: 'john.doe@example.com',
         equipments: [],
       };
+      const mockOffboardingData = {} as OffboardingData;
 
-      service.offboardEmployee('1').subscribe((employee) => {
-        expect(employee.status).toBe('OFFBOARDED');
-        expect(employee).toEqual(mockEmployee);
-      });
+      service
+        .offboardEmployee('1', mockOffboardingData)
+        .subscribe((employee) => {
+          expect(employee.status).toBe('OFFBOARDED');
+          expect(employee).toEqual(mockEmployee);
+        });
 
       const req = httpController.expectOne(
         `${service['baseUrl']}/users/1/offboard`,
