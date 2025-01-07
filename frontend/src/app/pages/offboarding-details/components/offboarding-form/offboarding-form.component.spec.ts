@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OffboardingFormComponent } from './offboarding-form.component';
+import { OffboardingFormComponent } from 'src/app/pages/offboarding-details/components/offboarding-form/offboarding-form.component';
 
 describe('OffboardingFormComponent', () => {
   let component: OffboardingFormComponent;

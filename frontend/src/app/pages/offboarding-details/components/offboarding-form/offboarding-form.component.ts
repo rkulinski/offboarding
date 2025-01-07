@@ -6,8 +6,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { CommonModule } from '@angular/common';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
-interface FormValues {
+export interface FormValues {
   streetLine1: string;
   country: string;
   postalCode: string;
@@ -21,7 +24,13 @@ interface FormValues {
   selector: 'app-offboarding-form',
   templateUrl: './offboarding-form.component.html',
   styleUrls: ['./offboarding-form.component.scss'],
-  imports: [ReactiveFormsModule, MatFormFieldModule],
+  imports: [
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    CommonModule,
+    MatInputModule,
+    MatButtonModule,
+  ],
 })
 export class OffboardingFormComponent {
   @Output() formSubmit = new EventEmitter<FormValues>();

@@ -27,7 +27,7 @@
     *ngIf="employee.status"
     mat-flat-button
     color="primary"
-    (click)="offboardEmployee()"
+    (click)="openOffboardingForm()"
     [disabled]="employee.status === 'OFFBOARDED'"
   >
     {{ employee.status === "OFFBOARDED" ? "Already Offboarded" : "Offboard" }}
@@ -63,3 +63,13 @@
 <div *ngIf="!employee">
   <p>Loading employee details...</p>
 </div>
+
+<app-modal
+  [title]="'Offboard Employee'"
+  [showModal]="isOffboardingModalOpen"
+  (closeModal)="isOffboardingModalOpen = false"
+>
+  <app-offboarding-form
+    (formSubmit)="offboardEmployee($event)"
+  ></app-offboarding-form>
+</app-modal>
