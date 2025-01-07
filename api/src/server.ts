@@ -30,7 +30,9 @@ app.post("/users/:id/offboard", (req: Request, res: Response) => {
     (emp: Employee) => emp.id === req.params.id,
   );
   if (employee) {
+    // TODO add offoboarding entry to offoboarding table
     employee.status = "OFFBOARDED";
+    // Saved with offboarding entry in a single transaction
     saveDb();
     res.json({ message: "Employee offboarded successfully" });
   } else {

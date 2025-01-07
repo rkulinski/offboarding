@@ -1,0 +1,65 @@
+<div *ngIf="employee" class="details-container">
+  <!-- Header -->
+  <header class="details-header">
+    <h1>Employee Details</h1>
+  </header>
+
+  <!-- Employee Information Section -->
+  <section class="details-section">
+    <div class="details-row">
+      <div class="details-item">
+        <p><strong>Name:</strong> {{ employee.name }}</p>
+      </div>
+      <div class="details-item">
+        <p><strong>Department:</strong> {{ employee.department }}</p>
+      </div>
+    </div>
+    <div class="details-row">
+      <div class="details-item">
+        <p><strong>Email:</strong> {{ employee.email }}</p>
+      </div>
+      <div class="details-item">
+        <p><strong>Status:</strong> {{ employee.status }}</p>
+      </div>
+    </div>
+  </section>
+  <button
+    *ngIf="employee.status"
+    mat-flat-button
+    color="primary"
+    (click)="offboardEmployee()"
+    [disabled]="employee.status === 'OFFBOARDED'"
+  >
+    {{ employee.status === "OFFBOARDED" ? "Already Offboarded" : "Offboard" }}
+  </button>
+
+  <!-- Equipments Section -->
+  <section class="equipment-section">
+    <h2>Equipments</h2>
+    <table
+      *ngIf="employee.equipments"
+      mat-table
+      [dataSource]="employee.equipments"
+      class="mat-elevation-z8 equipment-table"
+    >
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let equipment">{{ equipment.name }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="['name']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['name']"></tr>
+    </table>
+    <p *ngIf="!employee.equipments">No equipment assigned to this employee.</p>
+  </section>
+
+  <section class="action-buttons">
+    <button mat-raised-button color="accent" routerLink="/offboarding">
+      Back to Dashboard
+    </button>
+  </section>
+</div>
+
+<div *ngIf="!employee">
+  <p>Loading employee details...</p>
+</div>
