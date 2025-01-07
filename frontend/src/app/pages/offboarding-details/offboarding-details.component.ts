@@ -5,15 +5,26 @@ import { FormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
 import { MatButton } from '@angular/material/button';
+import { OffboardingFormComponent } from './components/offboarding-form/offboarding-form.component';
+import { ModalComponent } from 'src/app/components/modal/modal.component';
 
 @Component({
   selector: 'app-offboarding-details',
-  imports: [FormsModule, MatTableModule, CommonModule, MatButton, RouterLink],
+  imports: [
+    FormsModule,
+    MatTableModule,
+    CommonModule,
+    MatButton,
+    RouterLink,
+    ModalComponent,
+    OffboardingFormComponent,
+  ],
   templateUrl: './offboarding-details.component.html',
   styleUrl: './offboarding-details.component.scss',
 })
 export class OffboardingDetailsComponent implements OnInit {
   employee: Employee | null = null;
+  isOffboardingModalOpen = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -21,6 +32,10 @@ export class OffboardingDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.fetchEmployeeData();
+  }
+
+  fetchEmployeeData(): void {
     const employeeId = this.route.snapshot.paramMap.get('id');
     if (employeeId) {
       this.apiService
@@ -31,11 +46,15 @@ export class OffboardingDetailsComponent implements OnInit {
     }
   }
 
-  offboardEmployee() {
+  openOffboardingForm() {
     if (!this.employee) {
       throw new Error('No employee selected.');
     }
+    this.isOffboardingModalOpen = true;
+  }
 
-    this.apiService.offboardEmployee(this.employee.id);
+  onFormSubmitSuccess() {
+    this.isOffboardingModalOpen = false;
+    this.fetchEmployeeData();
   }
 }

@@ -9,6 +9,8 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { DataSource } from '@angular/cdk/collections';
 import { Observable, ReplaySubject } from 'rxjs';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-offboarding-listing',
@@ -27,6 +29,7 @@ import { Observable, ReplaySubject } from 'rxjs';
 export class OffboardingListingComponent implements OnInit {
   employees: Employee[] = [];
   searchQuery = '';
+  searchSubject = new Subject<string>();
   displayedColumns: string[] = ['name', 'department', 'status', 'actions'];
   dataSource = new ExampleDataSource(this.employees);
 
@@ -34,6 +37,7 @@ export class OffboardingListingComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadEmployees();
+    this.setupSearchFilter();
   }
 
   loadEmployees(): void {
@@ -43,8 +47,25 @@ export class OffboardingListingComponent implements OnInit {
     });
   }
 
-  filterEmployees(): void {
-    const lowerCaseQuery = this.searchQuery.toLowerCase();
+  setupSearchFilter(): void {
+    this.searchSubject
+      .pipe(debounceTime(200), distinctUntilChanged())
+      .subscribe((searchTerm) => {
+        this.filterEmployees(searchTerm);
+      });
+  }
+
+  onSearchQueryChange(): void {
+    this.searchSubject.next(this.searchQuery);
+  }
+
+  clearSearch(): void {
+    this.searchQuery = '';
+    this.onSearchQueryChange();
+  }
+
+  filterEmployees(searchTerm: string): void {
+    const lowerCaseQuery = searchTerm.toLowerCase();
 
     const filteredData = this.employees.filter(
       (employee) =>

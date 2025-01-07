@@ -1,10 +1,8 @@
 <div *ngIf="employee" class="details-container">
-  <!-- Header -->
   <header class="details-header">
     <h1>Employee Details</h1>
   </header>
 
-  <!-- Employee Information Section -->
   <section class="details-section">
     <div class="details-row">
       <div class="details-item">
@@ -27,15 +25,14 @@
     *ngIf="employee.status"
     mat-flat-button
     color="primary"
-    (click)="offboardEmployee()"
+    (click)="openOffboardingForm()"
     [disabled]="employee.status === 'OFFBOARDED'"
   >
     {{ employee.status === "OFFBOARDED" ? "Already Offboarded" : "Offboard" }}
   </button>
 
-  <!-- Equipments Section -->
   <section class="equipment-section">
-    <h2>Equipments</h2>
+    <h2>Equipment</h2>
     <table
       *ngIf="employee.equipments"
       mat-table
@@ -63,3 +60,15 @@
 <div *ngIf="!employee">
   <p>Loading employee details...</p>
 </div>
+
+<app-modal
+  [title]="'Offboard Employee'"
+  [showModal]="isOffboardingModalOpen"
+  (closeModal)="isOffboardingModalOpen = false"
+>
+  <app-offboarding-form
+    *ngIf="employee"
+    [employeeId]="employee.id"
+    (formSubmitSuccess)="onFormSubmitSuccess()"
+  ></app-offboarding-form>
+</app-modal>

@@ -6,7 +6,7 @@
       <input
         matInput
         [(ngModel)]="searchQuery"
-        (ngModelChange)="filterEmployees()"
+        (input)="onSearchQueryChange()"
         placeholder="Search by name or department"
       />
       @if (searchQuery) {
@@ -14,7 +14,7 @@
           matSuffix
           mat-icon-button
           aria-label="Clear"
-          (click)="searchQuery = ''"
+          (click)="clearSearch()"
         >
           <mat-icon>close</mat-icon>
         </button>
