@@ -70,6 +70,8 @@
   (closeModal)="isOffboardingModalOpen = false"
 >
   <app-offboarding-form
-    (formSubmit)="offboardEmployee($event)"
+    *ngIf="employee"
+    [employeeId]="employee.id"
+    (formSubmitSuccess)="onFormSubmitSuccess()"
   ></app-offboarding-form>
 </app-modal>

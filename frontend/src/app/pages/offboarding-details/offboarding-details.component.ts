@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  ApiService,
-  Employee,
-  OffboardingData,
-} from 'src/app/services/api/api.service';
+import { ApiService, Employee } from 'src/app/services/api/api.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
@@ -36,6 +32,10 @@ export class OffboardingDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.fetchEmployeeData();
+  }
+
+  fetchEmployeeData(): void {
     const employeeId = this.route.snapshot.paramMap.get('id');
     if (employeeId) {
       this.apiService
@@ -53,12 +53,8 @@ export class OffboardingDetailsComponent implements OnInit {
     this.isOffboardingModalOpen = true;
   }
 
-  offboardEmployee(data: OffboardingData) {
-    if (!this.employee) {
-      throw new Error('No employee selected.');
-    }
-    this.isOffboardingModalOpen = true;
-
-    this.apiService.offboardEmployee(this.employee.id, data);
+  onFormSubmitSuccess() {
+    this.isOffboardingModalOpen = false;
+    this.fetchEmployeeData();
   }
 }
