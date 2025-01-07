@@ -1,0 +1,66 @@
+<form [formGroup]="offboardingForm" (ngSubmit)="submit()">
+  <mat-form-field appearance="fill">
+    <mat-label>Street Line 1</mat-label>
+    <input matInput formControlName="streetLine1" />
+    <mat-error *ngIf="offboardingForm.get('streetLine1')?.hasError('required')">
+      Street Line 1 is required.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Country</mat-label>
+    <input matInput formControlName="country" />
+    <mat-error *ngIf="offboardingForm.get('country')?.hasError('required')">
+      Country is required.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Postal Code</mat-label>
+    <input matInput formControlName="postalCode" />
+    <mat-error *ngIf="offboardingForm.get('postalCode')?.hasError('required')">
+      Postal Code is required.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Receiver</mat-label>
+    <input matInput formControlName="receiver" />
+    <mat-error *ngIf="offboardingForm.get('receiver')?.hasError('required')">
+      Receiver is required.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Notes</mat-label>
+    <textarea matInput formControlName="notes"></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Phone</mat-label>
+    <input matInput formControlName="phone" />
+    <mat-error *ngIf="offboardingForm.get('phone')?.hasError('required')">
+      Phone is required.
+    </mat-error>
+    <mat-error *ngIf="offboardingForm.get('phone')?.hasError('pattern')">
+      Enter a valid phone number.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" />
+    <mat-error *ngIf="offboardingForm.get('email')?.hasError('required')">
+      Email is required.
+    </mat-error>
+    <mat-error *ngIf="offboardingForm.get('email')?.hasError('email')">
+      Enter a valid email address.
+    </mat-error>
+  </mat-form-field>
+
+  <div class="form-actions">
+    <button mat-raised-button color="primary" type="submit" [disabled]="offboardingForm.invalid">
+      Submit
+    </button>
+  </div>
+</form>
