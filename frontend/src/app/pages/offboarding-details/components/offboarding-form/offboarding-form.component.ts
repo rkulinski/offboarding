@@ -9,16 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-
-export interface FormValues {
-  streetLine1: string;
-  country: string;
-  postalCode: string;
-  receiver: string;
-  notes: string;
-  phone: string;
-  email: string;
-}
+import { OffboardingData } from 'src/app/services/api/api.service';
 
 @Component({
   selector: 'app-offboarding-form',
@@ -33,7 +24,7 @@ export interface FormValues {
   ],
 })
 export class OffboardingFormComponent {
-  @Output() formSubmit = new EventEmitter<FormValues>();
+  @Output() formSubmit = new EventEmitter<OffboardingData>();
 
   offboardingForm: FormGroup;
 
@@ -44,7 +35,7 @@ export class OffboardingFormComponent {
       postalCode: ['', Validators.required],
       receiver: ['', Validators.required],
       notes: [''],
-      phone: ['', [Validators.required, Validators.pattern(/^\+\d{10,15}$/)]],
+      phone: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
     });
   }

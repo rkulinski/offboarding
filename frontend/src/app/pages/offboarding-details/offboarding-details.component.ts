@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService, Employee } from 'src/app/services/api/api.service';
+import {
+  ApiService,
+  Employee,
+  OffboardingData,
+} from 'src/app/services/api/api.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
 import { MatButton } from '@angular/material/button';
-import {
-  FormValues as OffboardingFormValues,
-  OffboardingFormComponent,
-} from './components/offboarding-form/offboarding-form.component';
+import { OffboardingFormComponent } from './components/offboarding-form/offboarding-form.component';
 import { ModalComponent } from 'src/app/components/modal/modal.component';
 
 @Component({
@@ -50,16 +51,14 @@ export class OffboardingDetailsComponent implements OnInit {
       throw new Error('No employee selected.');
     }
     this.isOffboardingModalOpen = true;
-
-    this.apiService.offboardEmployee(this.employee.id);
   }
 
-  offboardEmployee(data: OffboardingFormValues) {
+  offboardEmployee(data: OffboardingData) {
     if (!this.employee) {
       throw new Error('No employee selected.');
     }
     this.isOffboardingModalOpen = true;
 
-    this.apiService.offboardEmployee(this.employee.id);
+    this.apiService.offboardEmployee(this.employee.id, data);
   }
 }

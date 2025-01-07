@@ -8,9 +8,8 @@ describe('OffboardingFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [OffboardingFormComponent]
-    })
-    .compileComponents();
+      imports: [OffboardingFormComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(OffboardingFormComponent);
     component = fixture.componentInstance;

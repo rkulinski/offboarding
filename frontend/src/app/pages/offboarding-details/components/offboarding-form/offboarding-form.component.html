@@ -1,4 +1,10 @@
-<form [formGroup]="offboardingForm" (ngSubmit)="submit()">
+<form
+  [formGroup]="offboardingForm"
+  (ngSubmit)="submit()"
+  class="offboarding-form"
+>
+  <h2>Offboarding Details</h2>
+
   <mat-form-field appearance="fill">
     <mat-label>Street Line 1</mat-label>
     <input matInput formControlName="streetLine1" />
@@ -59,8 +65,13 @@
   </mat-form-field>
 
   <div class="form-actions">
-    <button mat-raised-button color="primary" type="submit" [disabled]="offboardingForm.invalid">
-      Submit
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="offboardingForm.invalid"
+    >
+      Confirm offboarding
     </button>
   </div>
 </form>

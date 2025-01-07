@@ -15,6 +15,16 @@ export interface Employee {
   equipments: Equipment[];
 }
 
+export interface OffboardingData {
+  streetLine1: string;
+  country: string;
+  postalCode: string;
+  receiver: string;
+  notes: string;
+  phone: string;
+  email: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -31,7 +41,10 @@ export class ApiService {
     return this.http.get<Employee>(`${this.baseUrl}/employees/${id}`);
   }
 
-  offboardEmployee(id: string) {
-    return this.http.post<Employee>(`${this.baseUrl}/users/${id}/offboard`, {});
+  offboardEmployee(id: string, data: OffboardingData) {
+    return this.http.post<Employee>(
+      `${this.baseUrl}/users/${id}/offboard`,
+      data,
+    );
   }
 }
