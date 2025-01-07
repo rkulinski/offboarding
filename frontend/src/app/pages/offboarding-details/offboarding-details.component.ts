@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService, Employee } from 'src/app/services/api/api.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
@@ -8,7 +8,7 @@ import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-offboarding-details',
-  imports: [FormsModule, MatTableModule, CommonModule, MatButton],
+  imports: [FormsModule, MatTableModule, CommonModule, MatButton, RouterLink],
   templateUrl: './offboarding-details.component.html',
   styleUrl: './offboarding-details.component.scss',
 })
