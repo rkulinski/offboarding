@@ -24,7 +24,7 @@ import { ApiService } from 'src/app/services/api/api.service';
   ],
 })
 export class OffboardingFormComponent {
-  @Input() employeeId: string = '';
+  @Input() employeeId = '';
   @Output() formSubmitSuccess = new EventEmitter<void>();
 
   offboardingForm: FormGroup;
