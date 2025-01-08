@@ -23,3 +23,13 @@ Api available at http://localhost:3000
   - Folders under "app" are generic and shared items.
   - Inside pages, we have modules that encapsulate all items specific for given module (page in this scenario).
   - Styles, foundational components should be defined using design system. For simplicity styling per component is used.
+
+
+## Tech Stack
+### Frontend
+- Angular [https://angular.dev/] 
+- Angular material [https://material.angular.io/]
+
+### Backend
+- Express [https://expressjs.com/]
+- JSON file as database
