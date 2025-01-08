@@ -64,12 +64,16 @@
     </mat-error>
   </mat-form-field>
 
+  <div *ngIf="serverError" class="error-message">
+    {{ serverError }}
+  </div>
+
   <div class="form-actions">
     <button
-      mat-raised-button
+      mat-flat-button
       color="primary"
       type="submit"
-      [disabled]="offboardingForm.invalid"
+      [disabled]="!canSubmit"
     >
       Confirm offboarding
     </button>
