@@ -45,7 +45,7 @@ export class OffboardingFormComponent {
   }
 
   submit(): void {
-    if (this.offboardingForm.valid) {
+    if (this.canSubmit) {
       this.apiService
         .offboardEmployee(this.employeeId, this.offboardingForm.value)
         .subscribe({
@@ -63,5 +63,13 @@ export class OffboardingFormComponent {
           },
         });
     }
+  }
+
+  get serverError(): string | null {
+    return this.offboardingForm.errors?.['serverError'] || null;
+  }
+
+  get canSubmit(): boolean {
+    return !!(this.offboardingForm.valid || this.serverError);
   }
 }
