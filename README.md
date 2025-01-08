@@ -21,5 +21,5 @@ Api available at http://localhost:3000
 - Backend is written in very simplistic way, but it would need to account for more complex scenarios (e.g. coming back to work after offboarding).
 - Even though project is 2 pages the structure is meant for bigger project to demonstrate approach:
   - Folders under "app" are generic and shared items.
-  - Inside pages we have modules that encapsulate all items specific for given module (page in this scenario).
+  - Inside pages, we have modules that encapsulate all items specific for given module (page in this scenario).
   - Styles, foundational components should be defined using design system. For simplicity styling per component is used.
