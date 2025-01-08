@@ -33,3 +33,6 @@ Api available at http://localhost:3000
 ### Backend
 - Express [https://expressjs.com/]
 - JSON file as database
+
+### CI
+- Github actions for lint and tests
